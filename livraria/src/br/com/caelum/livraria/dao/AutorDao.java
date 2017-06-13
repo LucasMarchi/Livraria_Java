@@ -8,15 +8,17 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
-import javax.inject.Inject;
+import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import br.com.caelum.livraria.interceptador.LogInterceptador;
 import br.com.caelum.livraria.modelo.Autor;
 
 // Passando o Controle da Classe para o EJB
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER) // Opcional, esse é o valor default
+@Interceptors({LogInterceptador.class}) // Classe que interceptará
 public class AutorDao {
 
 	// Injetando a dependencia
